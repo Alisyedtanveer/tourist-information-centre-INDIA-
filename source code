@@ -1,0 +1,935 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<math.h>
+#include<conio.h>
+
+
+#define kyc struct tour
+struct tour
+{
+
+char name[20];
+char country[20];
+char city[20];
+char passport_no[30];
+int rate;
+
+};
+
+void display(FILE *fp);
+void places(FILE *ft);
+void packages();
+void lhotel();
+void lhotel2();
+void tickets();
+void currency();
+void feedback(FILE *fp);
+void main_page();
+void printHead();
+void printChar(char ch, int n);
+void agra();
+void bangalore();
+void chennai();
+void dehradun();
+void delhi();
+void goa();
+void hyderabad();
+void jaipur();
+void jodhpur();
+void khajuraho();
+void kovalam();
+void kolkata();
+void mumbai();
+void pune();
+void simla();
+void srinagar();
+void udaipur();
+FILE *ft;
+FILE *fp;
+
+int main()
+{
+
+
+if((fp = fopen("tourist.txt","rb+")) == NULL)
+{
+	if((fp = fopen("tourist.txt","wb+")) == NULL)
+	{
+		printf("FILE CAN'T BE OPENED......");
+}
+}
+
+printHead();
+printf("\n\n\t\t\t\t\tCREATED BY");
+printf("\n\n\t\t\t\t\tALI SYED TANVEER");
+printf("\n\n\t\t\t\t\tCSE JNCT");
+printf("\n\t\t\t\t\tpress any key to continue");
+getch();
+
+
+main_page();
+return 1;
+}
+
+void feedback(FILE *fp)
+{
+	printHead();
+	char another='y';
+kyc t;
+printf("\n                                        WELCOME TO FEEDBACK MENU!!! \n");
+
+
+	
+fseek(fp,0,2);
+//printf("\n\n\n\n\n\n\n\n\t\t\t\tCAN YOU PLEASE GIVE 2 MINUTES TO FEED YOUR DETAILS \n\n\t\t\t\tIT WILL HELP US TO KNOW HOW WE ARE SERVING YOU !!! \n\n\t\t\t\t\t\t\t(Y/N)\n\n\t\t\t\t\t\t\t ");
+//int f = getchar();
+//if(f=='y'||f=='Y')
+
+	while(another=='y'||another=='Y')      //for entries of who all are using the programs
+		{
+			printf("\n\n\t\t\t\tNAME :");
+			fflush(stdin);
+			fgets(t.name,20,stdin);
+			t.name[strlen(t.name)-1]='\0';
+
+			printf("\n\t\t\t\tCOUNTRY :");
+			fflush(stdin);
+			fgets(t.country,20,stdin);
+			t.country[strlen(t.country)-1]='\0';
+			printf("\n\t\t\t\tCITY :");
+			fflush(stdin);
+			fgets(t.city,20,stdin);
+			t.city[strlen(t.city)-1]='\0';
+			printf("\n\t\t\t\tPASSPORT NUMBER :");
+			fflush(stdin);
+			fgets(t.passport_no,30,stdin);
+			t.passport_no[strlen(t.passport_no)-1]='\0';
+			printf("\n\t\t\t\tRATING OUT OF 5 :");
+			scanf("%i",&t.rate);
+
+			fwrite(&t,sizeof(t),1,fp);
+			printf("\n\t\t\t ANYONE ELSE WITH YOU (Y/N)?");
+			fflush(stdin);
+			another = getchar();
+		}
+
+
+}
+
+
+void main_page()
+{int option;
+	while(1)
+{
+	printHead();
+
+
+	printf("\n                                         1.PLACES TO VISIT IN INDIA\n");
+	printf("\n                                         2.BOOK YOUR TOUR PACKAGES NOW\n");
+	printf("\n                                         3.FAMOUS LUXURY HOTELS\n");
+	printf("\n                                         4.BOOK YOUR TICKETS NOW !!!\n");
+	printf("\n                                         5.DISPLAY PEOPLES VISITED TIC WITH FEEDBACK\n");
+	printf("\n                                         6.CURRENCY CONVERTER\n");
+	printf("\n                                         7.FEEDBACK");
+	printf("\n\n                                         0.EXIT-->XXXX");
+	printf("\n\n                                          ENTER YOUR CHOICE  -> ");
+	scanf("%d",&option);
+
+switch(option)
+{   case 0: exit(0);
+			break;
+    case 1: places(ft);
+			break;
+    case 2: packages();
+			break;
+	case 3: lhotel();
+			break;
+	case 4: tickets();
+			break;
+	case 5: display(fp);
+			break;
+	case 6: currency();
+			break;
+	case 7: feedback(fp);
+			break;
+	default: printf("\n\t\t\t\tYou Pressed wrong key");
+                  printf("\n\t\t\t\tProgram terminated");
+                  getch();
+                  exit(0);
+
+
+}
+
+}
+}
+
+
+
+
+void printChar(char ch,int n)
+{
+    while(n--)
+    {
+        putchar(ch);
+    }
+}
+
+void printHead()
+{
+system("cls");
+printf("\n\t\t\t");
+printChar('*',66);
+printf("\n\t\t\t");
+printChar('>',16);
+printf("TOURIST INFORMATION CENTER [INDIA]");
+printChar('<',16);
+printf("\n\t\t\t");
+printChar('*',66);
+printf("\n");
+}
+//FOR CHECKING HOW MANY TOURIST VISITED THE PROGRAM
+void display(FILE *fp)
+{
+	printHead();
+	rewind(fp);
+	kyc t;
+	while((fread(&t,sizeof(t),1,fp))==1)
+		{
+			printf("\n\t\t\t\tName : %s",t.name);
+			printf("\n\t\t\t\tCountry : %s",t.country);
+			printf("\n\t\t\t\tCity : %s",t.city);
+			printf("\n\t\t\t\tPassport no : %s",t.passport_no);
+			printf("\n\t\t\t\tRATING OUT OF 5 : %i \n",t.rate);
+
+		}
+	printf("\n");
+	system("pause");
+
+}
+void tickets()
+{
+    system("cls");
+printHead();
+
+int op;
+//op = getch();
+while(1)
+{
+printf("\n\t\t\t\tBOOK YOUR TICKETS NOW \n\t\t\t\tPLEASE SELECT YOUR CHOICE  : ");
+printf("\n                            1.FLY WITH AIR INDIA");
+printf("\n                            2.FLY WITH EMIRATES");
+printf("\n                            3.FLY WITH QATAR AIRWAYS");
+printf("\n                            4.FLY WITH SINGAPORE AIRLINES");
+printf("\n                            5.FLY WITH THAI AIRLINES");
+printf("\n                            6.FLY WITH CHINA AIRLINES");
+printf("\n                            7.FLY WITH UNITED");
+printf("\n                            8.FLY WITH BRITISH AIRWAYS");
+printf("\n                            9.FLY WITH CATHAY PACIFIC");
+printf("\n                            10.FLY WITH ATALASJET");
+printf("\n                            11.FLY WITH JAL");
+printf("\n                            12.FLY WITH SILKAIR");
+printf("\n                            13.FLY WITH LUFTHANSA");
+printf("\n                            14.FLY WITH AIR ASTANA");
+printf("\n                            15.GET BACK TO START MENU");
+printf("\n                            16.EXIT-->XXXX");
+
+printf("\n			PLEASE ENTER YOUR CHOICE : ");
+scanf("%d",&op);
+
+switch(op)
+{
+
+    case 1: system("start http://www.airindia.in/");
+			break;
+	case 2: system("start https://www.emirates.com/in/english/?gclid=CjwKCAiAwJTjBRBhEiwA56V7q7nv4F1obUTbNwcDKkFsdr118NLvrBoROPB34m84TEqvwm6oNjUMwhoCGZwQAvD_BwE&gclsrc=aw.ds");
+			break;
+	case 3: system("start https://www.qatarairways.com");
+			break;
+	case 4: system("start https://www.singaporeair.com/en_UK/in/home");
+			break;
+	case 5: system("start https://www.thaiairways.com");
+			break;
+	case 6: system("start https://www.china-airlines.com/us/en");
+			break;
+	case 7: system("start https://www.united.com/en/us");
+			break;
+	case 8: system("start https://www.britishairways.com");
+			break;
+	case 9: system("start https://www.cathaypacific.com/cx/en_IN.html");
+			break;
+	case 10: system("start https://www.atlasglb.com/");
+			break;
+	case 11: system("start https://www.jal.com/en/");
+			break;
+	case 12: system("start https://www.silkair.com/en_UK/in/home");
+			break;
+	case 13: system("start https://www.lufthansa.com");
+			break;
+	case 14: system("start https://airastana.com");
+			break;
+	case 15: main_page();
+			break;
+	case 16: exit(0);
+			break;
+	default: printf("\n\t\t\t\tYou Pressed wrong key");
+                  printf("\n\t\t\t\tProgram terminated");
+                  getch();
+                  exit(0);
+}
+
+
+
+}
+
+}
+void places(FILE *ft)
+{
+	//FILE *ft;
+	char str[8350];
+	if((ft = fopen("places.txt","rb+"))==NULL)
+	{
+		printf("FILE CAN'T BE OPENED ......");
+	}
+	printHead();
+	fseek(ft,0,0);
+	//fgets(str,10000,ft);
+	while (!feof(ft))
+	{
+        fread(str, sizeof(str), 1, ft);
+
+
+		printf("%s",str);
+	}
+	fclose(ft);
+	printf("\n");
+	system("pause");
+
+}
+
+void packages()
+{printHead();
+system("start https://www.tourmyindia.com/states/");
+
+system("pause");
+
+}
+
+void currency()
+{int choice;
+float amt;;
+printHead();
+
+printf("!!! Note : The amount calculated will be approx of acual \n amount due to fluctuations in currency");
+system("pause");
+system("cls");
+printHead();
+	printf("SELECT THE CURRENCY FROM WHICH YOU WANT TO CONVERTER\n \n\n\n\t\t\t\t\t1. UNITED STATES DOLLAR\n\t\t\t\t\t2. SAUDI RIyAL\n\t\t\t\t\t3. QATARI RIAL\n\t\t\t\t\t4. AUSTRALIAN DOLLARS\n\t\t\t\t\t5. NIGERIAN NAIRA\n\t\t\t\t\t6. NEW ZEALAND DOLLAR\n\t\t\t\t\t7. OMANI RIAL\n\t\t\t\t\t8. RUSSIAN RUBBLE\n\t\t\t\t\t9. SINGAPORE DOLLAR\n\t\t\t\t\t10. UNITED ARAB EMIRATES DIRHAM\n\t\t\t\t\t11. MAIN PAGE\n\t\t\t\t\t12.exit");
+    printf("\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&choice);
+	system("cls");
+	printHead();
+	switch(choice)
+	{
+		case 1 : printf("\t\t\t\t\tPLEASE ENTER THE AMOUNT : ");
+				 //fflush(stdin);
+	             scanf("%f",&amt);
+				 printf("\t\t\t\t\t$%f = RS%0.2f",amt,amt*70);
+				 printf("\n");
+				 system("pause");
+				 break;
+
+		case 2 : printf("\t\t\t\t\tPLEASE ENTER THE AMOUNT : ");
+	             scanf("%f",&amt);
+				 printf("\t\t\t\t\tSR%0.2f = RS%f",amt,amt*18.99);
+				printf("\n");
+				system("pause");
+				 break;
+
+		case 3 :printf("\t\t\t\t\tPLEASE ENTER THE AMOUNT : ");
+	             scanf("%f",&amt);
+				 printf("\t\t\t\t\tQAR%0.2f = RS%0.2f",amt,amt*19.56);
+				 printf("\n");
+				 system("pause");
+				 break;
+
+		case 4 : printf("\t\t\t\t\tPLEASE ENTER THE AMOUNT : ");
+	             scanf("%f",&amt);
+				 printf("\t\t\t\t\tAU$%f : RS%0.2f",amt,amt*50.59);
+				 printf("\n");
+				 system("pause");
+				 break;
+
+		case 5 : printf("\t\t\t\t\tPLEASE ENTER THE AMOUNT : ");
+	             scanf("%f",&amt);
+				 printf("\t\t\t\t\tNGN %f = RS%0.2f",amt,amt*0.20);
+				 printf("\n");
+				 system("pause");
+				 break;
+
+		case 6 : printf("\t\t\t\t\tPLEASE ENTER THE AMOUNT : ");
+	             scanf("%f",&amt);
+				 printf("\t\t\t\t\t$%f = RS%0.2f",amt,amt*48.80);
+				 printf("\n");
+				 system("pause");
+                 break;
+
+		case 7 :printf("\t\t\t\t\tPLEASE ENTER THE AMOUNT : ");
+	             scanf("%f",&amt);
+				 printf("\t\t\t\t\tOMR %f = RS%0.2f",amt,amt*185.01);
+				 printf("\n");
+				 system("pause");
+		         break;
+
+		case 8 : printf("\t\t\t\t\tPLEASE ENTER THE AMOUNT : ");
+	             scanf("%f",&amt);
+				 printf("\t\t\t\t\tRUB%f = RS%0.2f",amt,amt*1.07);
+				 printf("\n");
+				 system("pause");
+				 break;
+
+		case 9 : printf("\t\t\t\t\tPLEASE ENTER THE AMOUNT : ");
+	             scanf("%f",&amt);
+				 printf("\t\t\t\t\tS$%f : RS%0.2f",amt,amt*52.46);
+				 printf("\n");
+				 system("pause");
+				 break;
+
+		case 10 : printf("\t\t\t\t\tPLEASE ENTER THE AMOUNT : ");
+	             scanf("%f",&amt);
+				 printf("\t\t\t\t\tAED %f = rs%0.2f",amt,amt*19.39);
+				 printf("\n");
+				 system("pause");
+				 break;
+		case 11 : main_page();
+				break;
+		case 12 : exit(0);
+				 break;
+
+		default: printf("\n\t\tYou Pressed wrong key");
+                  printf("\n\t\tProgram terminated");
+                  getch();
+                  exit(0);
+
+
+
+	}
+
+}
+void lhotel()
+{
+	
+	printHead();
+	int opt;
+	
+	printf("\n\t\t\t\tPLEASE SELECT CITY  : ");
+printf("\n                            1.AGRA");
+printf("\n                            2.BANGALORE");
+printf("\n                            3.CHENNAI");
+printf("\n                            4.DEHRADUN");
+printf("\n                            5.DELHI");
+printf("\n                            6.GOA");
+printf("\n                            7.HYDERABAD");
+printf("\n                            8.JAIPUR");
+printf("\n                            9.JODHPUR");
+printf("\n                            10.KHAJURAHO");
+printf("\n                            11.KOLKATA");
+printf("\n                            12.KOVALAM");
+printf("\n                            13.MUMBAI");
+printf("\n                            14.PUNE");
+printf("\n                            15.SIMLA");
+printf("\n                            16.SRINAGAR");
+printf("\n                            17.UDAIPUR");
+printf("\n                            0.EXIT");
+
+lhotel2();
+	
+}
+
+void lhotel2()
+{int opt;
+	printf("             please enter your choice from the options : ");
+	scanf("%d",&opt);
+	
+	switch(opt)
+	{
+	case 0: exit(0);
+			break;
+	case 1: agra();
+			break;
+	case 2: bangalore();
+			break;
+	case 3: chennai();
+			break;
+	case 4: dehradun();
+			break;
+	case 5: delhi();
+			break;
+	case 6: goa();
+			break;
+	case 7: hyderabad();
+			break;
+	case 8: jaipur();
+			break;
+	case 9: jodhpur();
+			break;
+	case 10: khajuraho();
+			break;
+	case 11:kolkata();
+			break;
+	case 12: kovalam();
+			break;
+	case 13: mumbai();
+			break;
+	case 14:pune();
+			break;
+	case 15:simla();
+			break;
+	case 16: srinagar();
+			break;
+	case 17: udaipur();
+    		break;
+	
+	default: printf("\n\t\t\t\tYou Pressed wrong key");
+                  printf("\n\t\t\t\tProgram terminated");
+                  getch();
+                  exit(0);
+}
+	
+}
+	
+void agra()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.THE OBOROI AMARVILAS.");
+	printf("\n                                 2.ITC MUGHAL.");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{
+		case 1: system("start https://www.oberoihotels.com/hotels-in-agra-amarvilas-resort/?gclid=CjwKCAiAqaTjBRAdEiwAOdx9xr8Oiqtc0n-jPQVgKxc29VXRF6HeqxDaiEiINSmYaas1I7DuK-20_hoCNAoQAvD_BwE");
+        	break;
+		case 2: system("start https://www.itchotels.in/hotels/agra/itcmughal/offers.html?source=google&medium=cpc&campaign=LCH_EV_ITC_Mughal_Agra_Brand_BMM&gclid=CjwKCAiAqaTjBRAdEiwAOdx9xr7_drco8ZrhhEqfKizcp7XN2htWFV720o8yIJwAf4bvJ3ATEMb7DhoC6ZAQAvD_BwE");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void bangalore()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.THE OBOROI Bangaluru.");
+	printf("\n                                 2.THE TAJ WEST END");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.oberoihotels.com/hotels-in-bengaluru/?gclid=CjwKCAiAqaTjBRAdEiwAOdx9xvMzd3tOM4MwiRMp-18Mix2UJr8ZIFycPBAHOkqqf4Tjxs0ngiUa6hoCqyoQAvD_BwE");
+    		break;
+		case 2: system("start https://www.hotelscombined.com/Hotel/The_Taj_West_End.htm?gclid=CjwKCAiAqaTjBRAdEiwAOdx9xqg4AOqJq3KblvRhcBIuj2ebHEXmKVunsR1e0O6dkGQyrzbawrTSrRoC0zEQAvD_BwE&gclsrc=aw.ds");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void chennai()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.Park Hyatt Chennai.");
+	printf("\n                                 2.Taj Coromandel.");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/chennai/park-hyatt-chennai");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/chennai/taj-coromandel");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void dehradun()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.Ananda in the Himalayas.");
+	printf("\n                                 2.BACK TO CITY LIST");
+	printf("\n                                 3.BACK TO MAIN PAGE");
+    printf("\n                                 4.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/dehradun/ananda-in-the-himalayas");
+    		break;
+		case 2: lhotel();
+			break;
+		case 3: main_page();
+			break;
+		case 4: exit(0);
+			break;
+	}	
+}
+
+void delhi()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.Taj Mahal Hotel.");
+	printf("\n                                 2.The Oberoi Gurgaon.");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/delhi/taj-mahal-hotel");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/delhi/the-oberoi-gurgaon");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void goa()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.Taj Exotica Goa.");
+	printf("\n                                 2.The Leela Hotel Goa.");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/goa/taj-exotica-goa");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/goa/the-leela-hotel-goa");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+void hyderabad()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.Taj Falaknuma Palace.");
+	printf("\n                                 2.Taj Krishna Hyderabad");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/hyderabad/taj-falaknuma-palace");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/hyderabad/taj-krishna-hyderabad");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();;
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void jaipur()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.Rambagh Palace.");
+	printf("\n                                 2.The Oberoi Rajvilas");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/jaipur/rambagh-palace");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/jaipur/the-oberoi-rajvilas");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void jodhpur()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.Umaid Bhawan Palace.");
+	printf("\n                                 2.RAAS Jodphur");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/jodphur/umaid-bhawan-palace");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/jodphur/raas-jodphur");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4:main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void khajuraho()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.The LaLiT Temple View Khajuraho.");
+	printf("\n                                 2.BACK TO CITY LIST");
+	printf("\n                                 3.BACK TO MAIN PAGE");
+    printf("\n                                 4.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/khajuraho/the-lalit-temple-view-khajuraho");
+    		break;
+		case 2: lhotel();
+			break;
+		case 3: main_page();
+			break;
+		case 4: exit(0);
+			break;
+	}	
+}
+void kolkata()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.Taj Bengal.");
+	printf("\n                                 2.The Oberoi Grand");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/kolkata/taj-bengal");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/kolkata/the-oberoi-grand");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void kovalam()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.Vivanta by Taj Trivandrum");
+	printf("\n                                 2.The Leela Kovalam Beach Resort");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/kovalam/vivanta-taj-trivandrum");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/kovalam/the-leela-kovalam-beach-resort");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void mumbai()
+{   int opt1;
+	system("cls");
+	printHead();
+	printf("\n                                 1.The Taj Mahal Palace Mumbai");
+	printf("\n                                 2.The Oberoi, Mumbai");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/mumbai/the-taj-mahal-palace-mumbai");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/mumbai/the-oberoi-mumbai");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void pune()
+{   int opt1;
+    system("cls");
+	printHead();
+	printf("\n                                 1.Sheraton Grand Pune Hotel.");
+	printf("\n                                 2.Vivanta by Taj - Blue Diamond Pune");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("starthttps://www.fivestaralliance.com/luxury-hotels/pune/sheraton-grand-pune-hotel ");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/pune/vivanta-taj-blue-diamond-pune");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void simla()
+{   int opt1;
+    system("cls");
+	printHead();
+	printf("\n                                 1.Wildflower Hall.");
+	printf("\n                                 2.OBOROI Cecil");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{
+		case 1: system("start https://www.fivestaralliance.com/luxury-hotels/simla/wildflower-hall");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/simla/oberoi-cecil");
+    		break;
+		case 3: lhotel();;
+			break;
+		case 4: main_page();;
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void srinagar()
+{   int opt1;
+    system("cls");
+	printHead();
+	printf("\n                                 1.The Khyber Himalayan Resort and Spa.");
+	printf("\n                                 2.The LaLiT Grand Palace Srinagar");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/srinagar/the-khyber-himalayan-resort-and-spa");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/srinagar/the-lalit-grand-palace-srinagar");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
+
+void udaipur()
+{   int opt1;
+    system("cls");
+	printHead();
+	printf("\n                                 1.THE OBOROI Udaivilas.");
+	printf("\n                                 2.THE TAJ LAKE PALACE");
+	printf("\n                                 3.BACK TO CITY LIST");
+	printf("\n                                 4.BACK TO MAIN PAGE");
+    printf("\n                                 5.EXIT");	
+	printf("\n\n\n\t\t\t\t\tPLEASE ENTER YOUR CHOICE : ");
+	scanf("%d",&opt1);
+	
+	switch(opt1)
+	{   case 1: system("start https://www.fivestaralliance.com/luxury-hotels/udaipur/the-oberoi-udaivilas");
+    		break;
+		case 2: system("start https://www.fivestaralliance.com/luxury-hotels/udaipur/taj-lake-palace");
+    		break;
+		case 3: lhotel();
+			break;
+		case 4: main_page();
+			break;
+		case 5: exit(0);
+			break;
+	}	
+}
